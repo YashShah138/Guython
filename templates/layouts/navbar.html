@@ -55,16 +55,6 @@
 {#            <a class="nav-link" style="padding-top: 10px; font-size: 22px; color: white; " href="/forums">Forums</a>#}
 {#            <!-- stub is shown using the name of the route -->#}
 {#        </div>#}
-        <div class="dropdown">
-            <pList class="dropdown1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Login
-            </pList>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                <a class="dropdown-item" href="/login">Log In</a>
-                <a class="dropdown-item" href="/register">Sign Up</a>
-            </div>
-        </div>
-
 {#        <div class="dropdown">#}
 {#            <pList class="dropdown1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
 {#                About Us#}
@@ -82,9 +72,9 @@
                 Topics
             </pList>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                <a class="dropdown-item" href="/topics/html">HTML</a>
-                <a class="dropdown-item" href="/topics/scss">CSS</a>
-                <a class="dropdown-item" href="/topics/javascript">JavaScript</a>
+                <a class="dropdown-item" href="/html">HTML</a>
+                <a class="dropdown-item" href="/scss">CSS</a>
+                <a class="dropdown-item" href="/javascript">JavaScript</a>
             </div>
         </div>
         <div class="dropdown">
@@ -112,41 +102,44 @@
 {#        <p style='margin-left: 10px; font-size: 10px; max-width: 200px' id="searchResult2"></p>#}
     </div>
 </nav>
-<script>
-    // this array and function are the same as on the home page but with different variable names so they don't overlap / break each other
-    let websitePages2 = '{"website_pages2":[' +
-        '{"name":"Hamza", "path":"/hamza/"},' +
-        '{"name":"Jakub", "path":"/jakub/"},' +
-        '{"name":"Kevin", "path":"/kevin/"},' +
-        '{"name":"Sreeja", "path":"/sreeja/"},' +
-        '{"name":"Tristan", "path":"/tristan/"},' +
-        '{"name":"Math", "path":"/math/"},' +
-        '{"name":"History", "path":"/history/"},' +
-        '{"name":"Science", "path":"/sci/"},' +
-        '{"name":"Literature", "path":"/lit/"},' +
-        '{"name":"Periodic Table", "path":"/periodictable/"},' +
-        '{"name":"API Collection", "path":"/api_collection/"},' +
-        '{"name":"CRUD", "path":"/crud/"},' +
-        '{"name":"Async CRUD", "path":"/crud_api/"},' +
-        '{"name":"Search (Database)", "path":"/crud/search/"}]}';
 
-    function SearchNavbar() {
-        let list2 = JSON.parse(websitePages2); // this allows the JSON array above to be used in JavaScript
-        let input2 = document.getElementById('SearchInput2');
-        let filter2 = input2.value.toUpperCase(); // the user's input is changed to uppercase so that the search is not case-sensitive
-        document.getElementById('searchResult2').innerHTML = '| ' // this line makes the output blank whenever the function is called so that previous information is removed
-        for (i = 0; i < websitePages2.length; i++) { // this section goes through the items in my array and checks if the user's input is the same as any object name
-            if (list2.website_pages2[i].name.toUpperCase().includes(filter2)) { //using include function allows users to only input part of the page name instead of the whole thing
-                let link2 = list2.website_pages2[i].path
-                let title2 = list2.website_pages2[i].name
-                let output2 =`<a href='${link2}'>${title2}</a>` + ' | ' //this allows multiple links to be included in #searchResult
-                document.getElementById('searchResult2').innerHTML += output2
-                document.getElementById('searchResult2').style.color = 'white'
-            }
-            if (filter2 === '') { //in case the user leaves the input blank, this statements causes the function to return "No Results"
-                document.getElementById('searchResult2').innerHTML = "No Results"
-                document.getElementById('searchResult2').style.color = 'red'
+<!--
+    <script>
+        // this array and function are the same as on the home page but with different variable names so they don't overlap / break each other
+        let websitePages2 = '{"website_pages2":[' +
+            '{"name":"Hamza", "path":"/hamza/"},' +
+            '{"name":"Jakub", "path":"/jakub/"},' +
+            '{"name":"Kevin", "path":"/kevin/"},' +
+            '{"name":"Sreeja", "path":"/sreeja/"},' +
+            '{"name":"Tristan", "path":"/tristan/"},' +
+            '{"name":"Math", "path":"/math/"},' +
+            '{"name":"History", "path":"/history/"},' +
+            '{"name":"Science", "path":"/sci/"},' +
+            '{"name":"Literature", "path":"/lit/"},' +
+            '{"name":"Periodic Table", "path":"/periodictable/"},' +
+            '{"name":"API Collection", "path":"/api_collection/"},' +
+            '{"name":"CRUD", "path":"/crud/"},' +
+            '{"name":"Async CRUD", "path":"/crud_api/"},' +
+            '{"name":"Search (Database)", "path":"/crud/search/"}]}';
+
+        function SearchNavbar() {
+            let list2 = JSON.parse(websitePages2); // this allows the JSON array above to be used in JavaScript
+            let input2 = document.getElementById('SearchInput2');
+            let filter2 = input2.value.toUpperCase(); // the user's input is changed to uppercase so that the search is not case-sensitive
+            document.getElementById('searchResult2').innerHTML = '| ' // this line makes the output blank whenever the function is called so that previous information is removed
+            for (i = 0; i < websitePages2.length; i++) { // this section goes through the items in my array and checks if the user's input is the same as any object name
+                if (list2.website_pages2[i].name.toUpperCase().includes(filter2)) { //using include function allows users to only input part of the page name instead of the whole thing
+                    let link2 = list2.website_pages2[i].path
+                    let title2 = list2.website_pages2[i].name
+                    let output2 =`<a href='${link2}'>${title2}</a>` + ' | ' //this allows multiple links to be included in #searchResult
+                    document.getElementById('searchResult2').innerHTML += output2
+                    document.getElementById('searchResult2').style.color = 'white'
+                }
+                if (filter2 === '') { //in case the user leaves the input blank, this statements causes the function to return "No Results"
+                    document.getElementById('searchResult2').innerHTML = "No Results"
+                    document.getElementById('searchResult2').style.color = 'red'
+                }
             }
         }
-    }
-</script>
+    </script>
+-->

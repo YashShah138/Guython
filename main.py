@@ -1,19 +1,21 @@
 # import "packages" from flask
 import requests, json
 from __init__ import app
+
 from tkinter import *
+
 from flask import Flask, request, Blueprint, render_template
 # from flask_socketio import SocketIO
 from image import image_data
 from pathlib import Path
 from cruddy.app_crud import app_crud
 from cruddy.app_crud_api import app_crud_api
-from topics import app_topics
+from class_topics import app_classtopics
 
 
 app.register_blueprint(app_crud)
 app.register_blueprint(app_crud_api)
-app.register_blueprint(app_topics)
+app.register_blueprint(app_classtopics)
 
 # create a Flask instance
 # app = Flask(__name__)
@@ -145,8 +147,8 @@ def api_collection():
     # API 1 - Brightest Stars Information
     url1 = "https://brightest-stars.p.rapidapi.com/brightstars"
     headers1 = {
-    'x-rapidapi-host': "brightest-stars.p.rapidapi.com",
-    'x-rapidapi-key': "21f1126bdamsh1578fd326fc88e5p1b4740jsn5ffba868400c"
+        'x-rapidapi-host': "brightest-stars.p.rapidapi.com",
+        'x-rapidapi-key': "21f1126bdamsh1578fd326fc88e5p1b4740jsn5ffba868400c"
     }
     response1 = requests.request("GET", url1, headers=headers1)
     text = response1.json()
@@ -229,78 +231,6 @@ def games():
 def translate():
     return render_template("api_pages/google_translate.html")
 
-#
-#
-#
-# ALL APP ROUTES BELOW ARE FOR OLD PAGES WE DON'T CURRENTLY USE
-# WE CAN DELETE THEM OR KEEP THEM TO ACCESS RUNTIME OF PAGES
-#
-#
-#
-
-@app.route('/lab1/', methods=['GET', 'POST'])
-def greet5():
-    # submit button has been pushed
-    if request.form:
-        name = request.form.get("name")
-        if len(name) != 0:  # input field has content
-            return render_template("our_workOLD/lab1.html", name=name)
-    # starting and empty input default
-    return render_template("our_workOLD/lab1.html", name="World")
-
-
-@app.route('/lab2/')
-def lab2():
-    return render_template("our_workOLD/lab2.html")
-
-
-@app.route('/lab3/', methods=['GET', 'POST'])
-def lab3():
-    path = Path(app.root_path) / "static" / "assets"
-    return render_template("our_workOLD/lab3.html", images=image_data(path))
-
-
-@app.route('/lab4/', methods={'GET', 'POST'})
-def lab4():
-    if request.form:
-        name = request.form.get("name")
-        if len(name) != 0:  # input field has content
-            return render_template("our_workOLD/lab4.html", BITS=int(name))
-    # starting and empty input default
-    return render_template("our_workOLD/lab4.html", imgBulbOn="/static/assets/bulb_on.gif",
-                           imgBulbOff="/static/assets"
-                                      "/bulb_off.png",
-                           msgTurnOn="Turn On", msgTurnOff="Turn Off", BITS=8)
-
-
-@app.route('/lab4_colorCode/', methods={'GET', 'POST'})
-def lab4_colorcode():
-    if request.form:
-        name = request.form.get("name")
-        if len(name) != 0:  # input field has content
-            return render_template("our_workOLD/lab4_colorCode.html", BITS=int(name))
-    # starting and empty input default
-    return render_template("our_workOLD/lab4_colorCode.html", imgBulbOn="/static/assets/bulb_on.gif",
-                           imgBulbOff="/static/assets"
-                                      "/bulb_off.png",
-                           msgTurnOn="Turn On", msgTurnOff="Turn Off", BITS=24)
-
-
-@app.route('/lab4_unsignedAdd/')
-def lab4_unsignedadd():
-    return render_template("our_workOLD/lab4_unsignedAdd.html", imgBulbOn="/static/assets/bulb_on.gif",
-                           imgBulbOff="/static/assets"
-                                      "/bulb_off.png",
-                           msgTurnOn="Turn On", msgTurnOff="Turn Off", BITS=16, )
-
-
-@app.route('/lab4_signedAdd/')
-def lab4_signedadd():
-    return render_template("our_workOLD/lab4_signedAdd.html", imgBulbOn="/static/assets/bulb_on.gif",
-                           imgBulbOff="/static/assets"
-                                      "/bulb_off.png",
-                           msgTurnOn="Turn On", msgTurnOff="Turn Off", BITS=16, )
-
 
 @app.route('/tpts/')
 def tpts():
@@ -320,66 +250,24 @@ def tt3():
                            msgTurnOn="Turn On", msgTurnOff="Turn Off", BITS=8)
 
 
-@app.route('/wireframe/')
-def wireframe():
-    return render_template("our_workOLD/wireframe.html")
-
-
-@app.route('/greet', methods=['GET', 'POST'])
-def greet():
-    # submit button has been pushed
-    if request.method == "POST":
-        name = request.form.get("name")
-        if len(name) != 0:  # input field has content
-            return render_template("greet.html", name=name)
-    # starting and empty input default
-    return render_template("greet.html", name="World")
-
-
-# The code below creates the weather pages
-
-@app.route('/weather1/')
-def weather1():
-    return render_template("weather_info/weather1.html")
-
-
-@app.route('/weather2/')
-def weather2():
-    return render_template("weather_info/weather2.html")
-
-
-@app.route('/weather3/')
-def weather3():
-    return render_template("weather_info/weather3.html")
-
-
-@app.route('/weather4/')
-def weather4():
-    return render_template("weather_info/weather4.html")
-
-
-@app.route('/wtd1/')
-def wtd1():
-    return render_template("weather_info/wtd1.html")
-
-
-@app.route('/wtd2/')
-def wtd2():
-    return render_template("weather_info/wtd2.html")
-
-
-@app.route('/wtd3/')
-def wtd3():
-    return render_template("weather_info/wtd3.html")
-
-
-@app.route('/weather_checks/')
-def wchecks():
-    return render_template("weather_info/weather_checks.html", background='linear-gradient(-45deg, #f3feed, #5c8be4, '
-                                                                          '#fbb73a)')
 @app.route('/snake/')
 def snake():
     return render_template("games/snake.html")
+
+
+@app.route('/html/')
+def html():
+    return render_template("topics/html.html")
+
+
+@app.route('/javascript/')
+def javascript():
+    return render_template("topics/javascript.html")
+
+
+@app.route('/scss/')
+def scss():
+    return render_template("topics/scss.html")
 
 # Forums socket.io code
 # @socketio.on('testing')

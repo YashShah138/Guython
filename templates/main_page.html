@@ -1,9 +1,9 @@
 <!-- Extending the predefined project layout -->
 {% extends "layouts/base.html" %}
-<!- This variable sets name of browser tab  -->
+<!-- This variable sets name of browser tab  -->
 {% set project = "Home" %}
 
-<!- This is a replacement block for Body in base.html -->
+<!-- This is a replacement block for Body in base.html -->
 {% block body %}
     <style>
         #SearchResult a:link {
@@ -92,13 +92,15 @@
     <a style="font-size: 35px; margin-bottom: 15px; color: greenyellow" target = "_blank" href="https://akhilnandhakumar.github.io/Guython/">Link to GitHub Pages</a>
     <br>
     <br>
+<!--
     <input type="text" id="SearchInput" onkeyup="SearchMain(list = websitePages, textcolor = '#c7ffd6', nullcolor = '#e30202', SearchID = 'SearchInput', ResultID = 'SearchResult', DebugMode = false)" placeholder="Search for pages" title="Search for pages">
-    <!-- here the search function is called with "onkeyup", meaning whenever a key input is let go.
-    This allows users to make searches without hitting a submit button -->
+    here the search function is called with "onkeyup", meaning whenever a key input is let go.
+    This allows users to make searches without hitting a submit button
     <br>
     <p id="SearchResult"></p>
-    <!-- This is were the output(s) of the search function are displayed-->
+    This is were the output(s) of the search function are displayed
 {#    <p id="containerFlavorText"> Click on any of these subjects to learn more!</p> <br>#}
+-->
     <body>
 
 {#    <div class="itemContainer">#}
@@ -339,6 +341,6 @@
     </script>
 
 {% endblock %}
-<!- This is turning off birds background from base.html -->
+<!-- This is turning off birds background from base.html -->
 {% block background %}
 {% endblock %}
